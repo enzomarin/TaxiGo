@@ -9,12 +9,30 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": "AIzaSyACItFLJfCIen9iICq5yaYEqO7Ni08icPA"
+      },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Necesitamos tu ubicación para mostrar tu ruta en el mapa.",
+        "NSLocationAlwaysUsageDescription": "Necesitamos tu ubicación para registrar tus kilómetros recorridos, incluso en segundo plano."
+      }
+      
     },
     "android": {
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "config":{
+        "googleMaps":{
+          "apiKey": "AIzaSyACItFLJfCIen9iICq5yaYEqO7Ni08icPA"
+        }
       }
     },
     "web": {
@@ -31,6 +49,12 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Permite que la aplicación acceda a su ubicación incluso cuando no está en uso."
         }
       ]
     ],
