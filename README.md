@@ -1,50 +1,53 @@
-# Welcome to your Expo app 👋
+# <p style="text-align:center">🚖 TaxiGo </p>
+TaxiGo es una aplicación móvil diseñada para conductores de taxi que buscan optimizar su trabajo diario mediante herramientas inteligentes y automatizadas. La aplicación combina funcionalidades avanzadas como geolocalización, cálculo de tarifas, y recordatorios programables, todo integrado en una interfaz intuitiva y fácil de usar.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 📌 Funcionalidades Clave
+### 1. 📅 Recordatorios Programables
+- Configura alertas para viajes recurrentes, como "Recoger a María en el aeropuerto cada jueves a las 9 AM".
+- Recibe notificaciones push y sonoras para no olvidar ningún viaje importante.
+### 2. 👥 Registro de Viajes con Datos de Pasajero
+- Registra información clave de los pasajeros:
+    - Nombre.
+    - Teléfono (opcional).
+    - Dirección de recogida y destino.
+- Accede a un historial de pasajeros frecuentes para agilizar futuros registros.
+### 3. 💰 Calculadora de Tarifas Inteligente
+- Configura tarifas personalizadas:
+    - Tarifa base.
+    - Precio por kilómetro, ajustable según el horario (día/noche).
+- Calcula automáticamente el costo del viaje al ingresar la distancia o seleccionar una ruta en el mapa.
+### 4. 🛣️ Contador de Kilómetros Automático
+- Modo Trabajo:
+    - Utiliza geolocalización en segundo plano con para registrar los kilómetros recorridos durante el turno.
+- Genera estadísticas detalladas:
+    - Resúmenes diarios, semanales y mensuales.
+    - Gráficos comparativos para analizar el rendimiento.
+### 5. 🗺️ Mapa de Navegación Integrado
+- Busca direcciones y destinos utilizando la Google Places API.
+- Flujo de Viaje:
+    - Busca un destino y muestra la ruta en el mapa.
+    - Inicia el viaje con un botón:
+        - Calcula automáticamente la distancia y el tiempo estimado.
+        - Activa el contador de kilómetros.
+    - Finaliza el viaje con otro botón:
+        - Auto-rellena los datos en el formulario de registro.
+## ⚙️ Tecnologías Utilizadas
+- React Native: Desarrollo de la interfaz móvil.
+- Expo: Framework para funcionalidades avanzadas como geolocalización y notificaciones.
+- Google Places API: Búsqueda de direcciones y rutas.
+- Supabase: Backend para autenticación y almacenamiento de datos.
+- React Native Maps: Visualización de mapas y rutas.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+## 🚀 Cómo desplegar el proyecto localmente
+Instalar dependencias:
 ```
+    npm install
+```
+Iniciar la aplicación:
+```
+    npx expo start
+```
+Abrir en un dispositivo:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Usa un emulador de Android/iOS.
+- Escanea el código QR con la app Expo Go.
