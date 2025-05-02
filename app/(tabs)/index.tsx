@@ -23,6 +23,8 @@ import {
   GooglePlaceDetail,
 } from "react-native-google-places-autocomplete";
 
+import MapViewDirection from "react-native-maps-directions";
+
 // Nivel de zoom personalizado (valores más pequeños = más zoom)
 const ZOOM_LEVEL = {
   LATITUDE_DELTA: 0.009, // Aprox. 500 metros de altura visible
@@ -40,6 +42,8 @@ export default function HomeScreen() {
   const [destination, setDestination] = useState<GooglePlaceDetail | null>(
     null
   );
+  const apiKey = process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY;
+
   useEffect(() => {
     let subscription: Location.LocationSubscription;
 
@@ -169,6 +173,29 @@ export default function HomeScreen() {
             coordinate={{
               latitude: destination?.geometry.location.lat,
               longitude: destination?.geometry.location.lng,
+            }}
+          />
+        )}
+
+        {location && destination && apiKey && (
+          <MapViewDirection
+            origin={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }}
+            destination={{
+              latitude: destination.geometry.location.lat,
+              longitude: destination.geometry.location.lng,
+            }}
+            apikey={apiKey}
+            strokeWidth={5}
+            strokeColor="hotpink"
+            precision="high"
+            onStart={() => {
+              console.log("Dirección iniciada");
+            }}
+            onError={(error) => {
+              console.error("Error en MapViewDirection: ", error);
             }}
           />
         )}
