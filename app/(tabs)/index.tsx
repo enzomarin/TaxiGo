@@ -24,6 +24,7 @@ import {
 } from "react-native-google-places-autocomplete";
 
 import MapViewDirection from "react-native-maps-directions";
+import * as Linking from "expo-linking";
 
 // Nivel de zoom personalizado (valores más pequeños = más zoom)
 const ZOOM_LEVEL = {
@@ -106,6 +107,63 @@ export default function HomeScreen() {
     } catch (error) {
       Alert.alert("Error", "No se pudo obtener la ubicación actual");
     }
+  };
+
+  const startNavigation = async () => {
+    if (!location || !destination) {
+      Alert.alert("Faltan datos", "Debes tener ubicación y destino.");
+      return;
+    }
+
+    const lat = destination.geometry.location.lat;
+    const lng = destination.geometry.location.lng;
+
+    const urls = [
+      {
+        name: "Google Maps",
+        url: `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`,
+      },
+      {
+        name: "Waze",
+        url: `waze://?ll=${lat},${lng}&navigate=yes`,
+      },
+      {
+        name: "Apple Maps",
+        url: `http://maps.apple.com/?daddr=${lat},${lng}&dirflg=d`,
+      },
+    ];
+
+    // Filtrar apps disponibles
+    const availableOptions = [];
+    for (const app of urls) {
+      const canOpen = await Linking.canOpenURL(app.url);
+      if (canOpen) {
+        availableOptions.push({
+          text: app.name,
+          onPress: () => Linking.openURL(app.url),
+        });
+      }
+    }
+
+    if (availableOptions.length === 0) {
+      Alert.alert("Ninguna app de navegación disponible.");
+      return;
+    }
+
+    Alert.alert(
+      "Elige una app",
+      "¿Cómo deseas navegar?",
+      [
+        ...availableOptions,
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+      ],
+      {
+        cancelable: true,
+      }
+    );
   };
 
   // 3. Render condicional mientras se obtiene la ubicación
@@ -201,6 +259,18 @@ export default function HomeScreen() {
         )}
       </MapView>
 
+      <View style={styles.startButtonContainer}>
+        <TouchableOpacity
+          style={styles.startButton}
+          onPress={startNavigation}
+          disabled={!location || !destination}
+        >
+          <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+            INICIAR
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.buttonsMapContainer}>
         {/* Botón para centrar */}
         <TouchableOpacity style={styles.centerButton} onPress={centerMap}>
@@ -212,6 +282,27 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  startButtonContainer: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: "20%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  startButton: {
+    width: 80,
+    height: 80,
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.25)",
+    elevation: 5,
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
